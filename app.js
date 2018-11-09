@@ -4,6 +4,8 @@ const app = express();
 // const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const { db } = require('./models');
+// const models = require('./models');
+
 
 const layout = require('./views/layout.js')
 
@@ -22,10 +24,20 @@ then(() => {
   console.log('connected to the database');
 });
 
+
 const PORT = 2211;
-app.listen(PORT, () => {
-  console.log(`App listening in port ${PORT}`);
-});
+
+const init = async () => {
+  await db.sync({force: true});
+  // await models.db.sync({force: true})
+
+
+  app.listen(PORT, () => {
+    console.log(`App listening in port ${PORT}`);
+  });
+}
+
+init();
 
 
 

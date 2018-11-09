@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize');
-const db = new Sequelize('postgres://localhost:5432/wikistack');
+const db = new Sequelize('postgres://localhost:5432/wikistack', {
+  logging: false
+});
 
 const Page = db.define('page', {
   title: {
@@ -26,13 +28,7 @@ const Page = db.define('page', {
     },
   },
   status: {
-    type: Sequelize.BOOLEAN,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-      defaultValue: true,
-      // ???????
-    },
+    type: Sequelize.ENUM('open', 'closed')
   },
   // if we can use true / false to mean open / closed ?????
 });
@@ -56,5 +52,5 @@ const User = db.define('user', {
 });
 
 module.exports = {
-  db,
+  db, Page, User
 };
