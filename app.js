@@ -6,8 +6,10 @@ const morgan = require('morgan');
 const { db } = require('./models');
 // const models = require('./models');
 
+const layout = require('./views/layout.js');
 
-const layout = require('./views/layout.js')
+app.use('/user', require('./routes/user'));
+app.use('/wiki', require('./routes/wiki'));
 
 app.use(express.urlencoded({ extended: false }));
 // app.use(bodyParser.json());
@@ -16,29 +18,22 @@ app.use(morgan('dev'));
 
 app.get('/', (req, res, next) => {
   // res.send('hello world');
-  res.send(layout(''))
+  res.send(layout(''));
 });
 
-db.authenticate().
-then(() => {
+db.authenticate().then(() => {
   console.log('connected to the database');
 });
-
 
 const PORT = 2211;
 
 const init = async () => {
-  await db.sync({force: true});
+  await db.sync({ force: true });
   // await models.db.sync({force: true})
-
 
   app.listen(PORT, () => {
     console.log(`App listening in port ${PORT}`);
   });
-}
+};
 
 init();
-
-
-
-
