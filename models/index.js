@@ -29,12 +29,7 @@ const Page = db.define('page', {
   },
   status: {
     type: Sequelize.ENUM('open', 'closed'),
-    // allowNull: false,
-    // validate: {
-    //   notEmpty: true,
-    // },
   },
-  // if we can use true / false to mean open / closed ?????
 });
 
 const User = db.define('user', {
