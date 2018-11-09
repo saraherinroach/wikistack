@@ -13,12 +13,12 @@ const Page = db.define('page', {
   },
   slug: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-      isAlphanumeric: true,
-      notContains: ' ',
-    },
+    // allowNull: false,
+    // validate: {
+    //   notEmpty: true,
+    //   isAlphanumeric: true,
+    //   notContains: ' ',
+    // },
   },
   content: {
     type: Sequelize.TEXT,

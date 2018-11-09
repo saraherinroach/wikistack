@@ -4,14 +4,16 @@ const app = express();
 // const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const { db } = require('./models');
-// const models = require('./models');
+const models = require('./models');
 
 const layout = require('./views/layout.js');
+
+app.use(express.urlencoded({ extended: false }));
 
 app.use('/user', require('./routes/user'));
 app.use('/wiki', require('./routes/wiki'));
 
-app.use(express.urlencoded({ extended: false }));
+
 // app.use(bodyParser.json());
 app.use(morgan('dev'));
 /**/ app.use(express.static(__dirname + '/client'));
