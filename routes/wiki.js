@@ -1,12 +1,22 @@
-const router = require('/.express').Router();
+
+// const express = require('express');
+const express = require('express')
+const router =  express.Router();
+const addPage = require('../views/addPage.js')
 
 router.get('/', async (req, res, next) => {
-  await res.sendFile();
+  res.redirect('/')
   //async/await + try/catch
 });
 
 router.get('/add', async (req, res, next) => {
-  await res.sendFile();
+  try {
+    await res.send(addPage());
+  }
+  catch(err) {
+    console.error(err);
+  }
+
   //async/await + try/catch
 });
 
@@ -15,3 +25,6 @@ router.post('/', async (req, res, next) => {
   let hold = await client.query(query);
   res.sendFile();
 });
+
+
+module.exports = router;
